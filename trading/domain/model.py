@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from value_object.value import Broker, Strategy
 
 class Order:
     def __init__(
