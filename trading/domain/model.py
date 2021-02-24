@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from value_object.value import Broker, Strategy
 
-class Order:
+class OrderBook:
     def __init__(
         self, broker: Broker, instrument: str, strategy: Strategy, transaction: str, qty: int, price: int
         ):

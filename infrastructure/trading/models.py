@@ -15,8 +15,8 @@ class Order(models.Model):
     transaction_type = models.CharField(max_length=3)
     qty = models.IntegerField()
     price = models.FloatField()
-    broker = models.ForeignKey(Broker)
-    strategy = models.ForeignKey(Strategy)
+    broker = models.ForeignKey(Broker, on_delete=models.CASCADE)
+    strategy = models.ForeignKey(Strategy, on_delete=models.CASCADE)
     intrument = models.CharField(max_length=255)
 
 
