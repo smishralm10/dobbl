@@ -30,7 +30,7 @@ class User:
     
     @property
     def email(self) -> str:
-        return self._email
+        return self._email.value
     
     @property
     def password(self) -> str:
@@ -46,12 +46,19 @@ class User:
     def verify_password(self, value: str) -> bool:
         return self._password.value == value
     
+    def verify_email(self, value: str) -> bool:
+        return self._email.value == value
+    
     def deactivate(self):
         self._active = False
 
     @classmethod
-    def factory(cls, username: str, password: Optional[str]=None, 
-                uuid: Optional[UUID]=None, active: Optional[bool]=True  
+    def factory(cls, 
+                username: str, 
+                password: Optional[str]=None, 
+                email: Optional[str]=None,
+                uuid: Optional[UUID]=None, 
+                active: Optional[bool]=True  
     ):
         uuid = uuid or uuid4()
 
@@ -62,5 +69,6 @@ class User:
             uuid=uuid,
             username=username,
             password=password,
+            email=email,
             active=active
         )

@@ -1,6 +1,6 @@
 import abc
 from uuid import UUID
-from domain.user import User
+from ..domain.user import User
 from django.db.models import Model
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -18,6 +18,10 @@ class AbstractUserRepository(abc.ABC):
     @abc.abstractmethod
     def create(self, user: User) -> User:
         raise NotImplementedError
+    
+    @abc.abstractmethod
+    def get_by_username(self, username: str) -> User:
+        raise NotImplementedError
 
 
 class DjangoUserRepository(AbstractUserRepository):
@@ -28,6 +32,14 @@ class DjangoUserRepository(AbstractUserRepository):
     def get(self, uuid: UUID) -> User:
         try:
             instance = self._model.objects.get(uuid=uuid)
+        except ObjectDoesNotExist:
+            return None
+        
+        return self._factory_user(instance)
+    
+    def get_by_username(self, username: str) -> User:
+        try:
+            instance = self._model.objects.get(username=username)
         except ObjectDoesNotExist:
             return None
         

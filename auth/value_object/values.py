@@ -82,6 +82,9 @@ class Password:
 class Email:
     def __init__(self, email: str):
         self._email = email
+    I have written some code but not sure it makes scene 
+    def __eq__(self, value: str):
+        return self._email == value
     
     @property
     def value(self):
